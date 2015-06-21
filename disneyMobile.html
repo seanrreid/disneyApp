@@ -6,7 +6,7 @@
 <body>
 	<div>
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist">
+		<ul class="nav nav-tabs" role="tablist" id="park_nav">
 			{{#each parks}}
 				{{#if equals park_id currentPark}}
 					<li role="presentation" class="active"><a class='park_tab' href="#{{park_id}}" aria-controls="{{park_id}}" role="tab" data-toggle="tab">{{park_name}}</a></li>

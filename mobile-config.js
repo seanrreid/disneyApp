@@ -1,7 +1,8 @@
 App.info({
-  name: 'Disneyland Paris Wait Times',
-  description: 'Simple app to show the Disneyland Paris wait times',
-  version: '0.0.1'
+	id: 'disney.jamie.holdings',
+	name: 'Disney Wait Times',
+	description: 'Simple app to show Disney wait times',
+	version: '0.0.1'
 });
 
 App.icons({

@@ -40,6 +40,7 @@ if (Meteor.isClient) {
     "click .park_tab": function(event) {
       var href = event.target.href.split("#")[1];
       SessionAmplify.set("currentPark", href);
+      window.scrollTo(0, 0);
     }
   });
 }
@@ -58,21 +59,38 @@ if (Meteor.isServer) {
 
   var parks = {
     DisneylandParis: {
-      name: "DisneyPark",
-      icon: "",
-      getWaitTimes: Meteor.wrapAsync(DisneyAPI.DisneylandParis.GetWaitTimes),
-      getSchedule: Meteor.wrapAsync(DisneyAPI.DisneylandParis.GetSchedule),
+      name: "DisneyPark"
     },
     WaltDisneyStudios: {
-      name: "Studios",
-      getWaitTimes: Meteor.wrapAsync(DisneyAPI.WaltDisneyStudios.GetWaitTimes),
-      getSchedule: Meteor.wrapAsync(DisneyAPI.WaltDisneyStudios.GetSchedule),
+      name: "Studios"
+    },
+    MagicKingdom: {
+      name: "Magic Kingdom"
+    },
+    Epcot: {
+      name: "Epcot"
+    },
+    HollywoodStudios: {
+      name: "Hollywood Studios"
+    },
+    AnimalKingdom: {
+      name: "Animal Kingdom"
+    },
+    Disneyland: {
+      name: "Disneyland"
+    },
+    CaliforniaAdventure: {
+      name: "California Adventure"
     }
   };
 
   // setup park collection
   for(var park in parks)
   {
+    // add async wraps
+    parks[ park ].getWaitTimes = Meteor.wrapAsync(DisneyAPI[ park ].GetWaitTimes);
+
+    // add park to database
     Parks.update(
       {park_id: park},
       {
