@@ -139,7 +139,7 @@ if (Meteor.isServer) {
 
   // update rides every 30 seconds
   UpdateRides();
-  //setInterval(UpdateRides, 1000 * 30);
+  Meteor.setInterval(UpdateRides, 1000 * 30);
 
   Meteor.publish("rides", function () {
     return Rides.find();
