@@ -64,7 +64,7 @@ if (Meteor.isServer) {
     WaltDisneyStudios: {
       name: "Studios"
     },
-    MagicKingdom: {
+    /*MagicKingdom: {
       name: "Magic Kingdom"
     },
     Epcot: {
@@ -81,10 +81,11 @@ if (Meteor.isServer) {
     },
     CaliforniaAdventure: {
       name: "California Adventure"
-    }
+    }*/
   };
 
   // setup park collection
+  Parks.remove({});
   for(var park in parks)
   {
     // add async wraps
