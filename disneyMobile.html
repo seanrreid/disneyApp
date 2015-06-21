@@ -1,0 +1,57 @@
+<head>
+  <title>Disneyland Paris Queue Times</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+<body>
+	<div>
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			{{#each parks}}
+				{{#if equals park_id currentPark}}
+					<li role="presentation" class="active"><a class='park_tab' href="#{{park_id}}" aria-controls="{{park_id}}" role="tab" data-toggle="tab">{{park_name}}</a></li>
+				{{else}}
+					<li role="presentation"><a class='park_tab' href="#{{park_id}}" aria-controls="{{park_id}}" role="tab" data-toggle="tab">{{park_name}}</a></li>
+				{{/if}}
+			{{/each}}
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			{{#each parks}}
+				{{#if equals park_id currentPark}}
+					<div role="tabpanel" class="tab-pane active" id="{{park_id}}">
+						<ul class="list-group">
+							{{#each rides}}
+								{{#if equals park ../park_id}}
+									{{> ride}}
+								{{/if}}
+							{{/each}}
+						</ul>
+					</div>
+				{{/if}}
+			{{/each}}
+		</div>
+
+	</div>
+</body>
+
+<template name="ride">
+  <li class="list-group-item">
+  	{{#if active}}
+  		{{#if lte waitTime 15}}
+  			<span class="label label-success">{{waitTime}}</span>
+  		{{else}}
+  			{{#if lte waitTime 30}}
+  				<span class="label label-warning">{{waitTime}}</span>
+  			{{else}}
+  				<span class="label label-danger">{{waitTime}}</span>
+  			{{/if}}
+  		{{/if}}
+  		{{name}}
+  	{{else}}
+  		<span class="label label-default">{{waitTime}}</span>
+  		<strike>{{name}}</strike>
+  	{{/if}}
+  </li>
+</template>
