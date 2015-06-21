@@ -2,6 +2,9 @@ var Rides = new Mongo.Collection("rides");
 var Parks = new Mongo.Collection("parks");
 
 if (Meteor.isClient) {
+  Meteor.subscribe("rides");
+  Meteor.subscribe("parks");
+
   var SessionAmplify = _.extend({}, Session, {
     keys: _.object(_.map(amplify.store(), function(value, key) {
       return [key, JSON.stringify(value)]
@@ -137,4 +140,11 @@ if (Meteor.isServer) {
   // update rides every 30 seconds
   UpdateRides();
   //setInterval(UpdateRides, 1000 * 30);
+
+  Meteor.publish("rides", function () {
+    return Rides.find();
+  });
+  Meteor.publish("parks", function () {
+    return Parks.find();
+  });
 }
